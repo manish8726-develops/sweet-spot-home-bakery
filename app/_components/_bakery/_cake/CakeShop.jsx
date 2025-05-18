@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import BackgroundSection from "./_components/BackgroundSection";
 import Card from "./_components/Card";
 const CakeShop = ({ data }) => {
