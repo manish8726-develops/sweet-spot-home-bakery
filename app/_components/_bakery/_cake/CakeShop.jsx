@@ -1,8 +1,21 @@
 "use client";
-
-import BackgroundSection from "./_components/BackgroundSection";
+import { getAllCakes } from "../../../_services/index";
+import React, { useEffect, useState } from "react";
 import Card from "./_components/Card";
-const CakeShop = ({ data }) => {
+const CakeShop = () => {
+
+
+     const [data, setData] = useState([])
+  const cakes = async () => {
+    const res = await getAllCakes();
+    if (res) {
+      setData(res)
+    }
+  };
+
+  useEffect(() => {
+    cakes()
+  }, []);
   console.log(data);
 
   return (
