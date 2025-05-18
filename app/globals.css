@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya%20SC:ital,wght@0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -119,4 +124,37 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+
+.ale-f {
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.alg-f{
+  font-family: 'Alegreya';
+  font-weight: 500;
+  font-style: normal;
+}
+.alg-sc{
+   font-family: 'Alegreya SC';
+  font-weight: 500;
+}
+
+.poppin{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+}
+.poppin-400{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+ 
+}
+::selection {
+    background: #F0DBB8; /* Change to any color */
+    color: #504536; /* Optional: Change the text color */
 }
