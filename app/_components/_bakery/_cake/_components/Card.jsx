@@ -8,7 +8,7 @@ const Card = ({name,price,img,sale,id}) => {
     
     
   return (
-      <Link href={`/shop/cakes/${img[0].id}`}>
+      <Link href={`/shop/cakes/${id}`}>
     <div className="flex flex-col items-center w-[315px] max-w-sm overflow-hidden bg-white border shadow-md rounded-xl">
       <div className="relative w-full h-56">
         <Image

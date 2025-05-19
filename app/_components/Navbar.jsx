@@ -5,6 +5,7 @@ import Image from "next/image";
 import { LucideMenu, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import FoodCarousel from "./FoodCarousel";
+import CartPopup from "./_bakery/_cake/_components/_cart/CartPopup";
 
 const Navbar = () => {
   const navItems = [
@@ -97,7 +98,8 @@ const Navbar = () => {
           <div className="flex items-center gap-6">
             <div className="relative">
               <span className="text-lg font-semibold cursor-pointer">
-                <ShoppingBag />
+                {/* <ShoppingBag /> */}
+                <CartPopup/>
               </span>
               <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
                 2

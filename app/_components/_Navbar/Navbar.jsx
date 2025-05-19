@@ -1,12 +1,11 @@
 "use client";
-
 import React, { useState } from "react";
 import NavbarLogo from "./NavbarLogo";
-import CartIcon from "./CartIcon";
 import Clerk from "../Clerk";
 import { LucideMenu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import CartPopup from "../_bakery/_cake/_components/_cart/CartPopup";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,7 +89,7 @@ export default function Navbar() {
 
         {/* Icons and Mobile Menu Button */}
         <div className="flex items-center gap-4">
-          <CartIcon />
+          <CartPopup/>
           <Clerk />
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
