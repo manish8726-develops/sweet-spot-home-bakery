@@ -230,20 +230,23 @@ export default function Checkout() {
             </DialogContent>
           </Dialog>
 
-          {/* Razorpay Info */}
-          <div className="flex items-center gap-3 p-4 mt-6 border border-purple-100 rounded-md bg-purple-50">
-            <Image
-              src="/icons/RazorPay.png"
-              height={60}
-              width={100}
-              alt="Razorpay Logo"
-              className="w-auto h-auto"
-            />
-            <div className="text-sm text-gray-700">
-              <p>UPI, Cards, NetBanking accepted</p>
-              <p className="text-xs text-gray-500">Powered by RazorPay</p>
-            </div>
-          </div>
+       {/* Razorpay Info */}
+<div className="flex flex-col gap-3 p-4 mt-6 border border-purple-100 rounded-md sm:flex-row sm:items-center bg-purple-50">
+  <div className="flex justify-center sm:justify-start">
+    <Image
+      src="/icons/RazorPay.png"
+      height={60}
+      width={100}
+      alt="Razorpay Logo"
+      className="object-contain"
+    />
+  </div>
+  <div className="text-sm text-center text-gray-700 sm:text-left">
+    <p>UPI, Cards, NetBanking accepted</p>
+    <p className="text-xs text-gray-500">Powered by RazorPay</p>
+  </div>
+</div>
+
 
           {/* Terms + Button */}
           <div className="mt-6 space-y-4 text-sm text-gray-600">
