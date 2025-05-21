@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
 } from "../../../../_redux/cart/cartslice";
-import FakeViewerCounter from "../../../FakeViewerCounter";
+import FakeViewerCounter from "../FakeViewerCounter";
 import Link from "next/link";
 
 const ProductDetail = ({ title, price, desc, img, weight, sale, id }) => {
