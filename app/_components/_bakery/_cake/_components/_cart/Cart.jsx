@@ -1,9 +1,16 @@
 "use client";
-import { removeFromCart } from "../../../../../_redux/cart/cartslice";
-import { Trash2, Verified, WatchIcon } from "lucide-react";
+import { incrementByAmount, removeFromCart } from "../../../../../_redux/cart/cartslice";
+import {   Trash2, } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  updateQuantity,
+} from "../../../../../_redux/cart/cartslice";
+
+import Link from "next/link";
+
 
 const products = [
   {
@@ -30,26 +37,31 @@ const products = [
   },
 ];
 
-export default function Cart() {
+export default  function Cart() {
   const productsArr = useSelector((state) => state.counter.items);
   const dispatch = useDispatch();
 
-  const subtotal = products.reduce(
+  const subtotal = productsArr.reduce(
     (total, product) => total + product.price * product.quantity,
     0
   );
-  const shipping = 5;
-  const tax = 8.32;
+    const { user } = useUser();
+  const shipping = 50;
+  const tax = 0;
   const total = subtotal + shipping + tax;
+
+ useEffect(() => {
+  dispatch(incrementByAmount(total));
+}, [total, dispatch]); // only run when total changes
 
   return (
     <div className="px-4 py-8 mx-auto bg-white sm:px-6 lg:px-8 max-w-7xl">
-      <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-900">
+      <h1 className="mb-8 text-3xl font-bold tracking-tight text-gray-700 poppin">
         Shopping Cart
       </h1>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Product List */}
-        <div className="space-y-8 lg:col-span-2">
+        <div className="space-y-8 lg:col-span-2 poppin-400">
           {productsArr.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 space-y-4 text-center">
               <Image
@@ -87,7 +99,7 @@ export default function Cart() {
                         {"Color N/A"} &nbsp; | &nbsp; {"Size N/A"}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-900">
-                        ${product.price}
+                        ₹{product.price}
                       </p>
                       {/* <p
               className={`mt-1 text-sm flex items-center gap-1 ${
@@ -111,11 +123,19 @@ export default function Cart() {
                   {/* Bottom Controls */}
                   <div className="flex items-center justify-between mt-4 sm:mt-2">
                     <select
-                      defaultValue={product.quantity}
+                      value={product.quantity}
                       className="px-2 py-1 text-sm border rounded"
+                      onChange={(e) => {
+                        const newQty = Number(e.target.value);
+                        dispatch(
+                          updateQuantity({ id: product.id, quantity: newQty })
+                        );
+                      }}
                     >
                       {[...Array(10)].map((_, i) => (
-                        <option key={i + 1}>{i + 1}</option>
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
                       ))}
                     </select>
 
@@ -134,14 +154,14 @@ export default function Cart() {
         </div>
 
         {/* Summary */}
-        <div className="p-6 rounded-lg shadow-md bg-gray-50">
+        <div className="p-6 rounded-lg shadow-md bg-gray-50 poppin-400">
           <h3 className="mb-4 text-lg font-semibold text-gray-900">
             Order summary
           </h3>
           <ul className="space-y-2 text-sm text-gray-700">
             <li className="flex justify-between">
               <span>Subtotal</span>
-              <span>${subtotal.toFixed(2)}</span>
+              <span>₹{subtotal.toFixed(2)}</span>
             </li>
             <li className="flex justify-between">
               <span>
@@ -150,7 +170,7 @@ export default function Cart() {
                   (?)
                 </span>
               </span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>₹{shipping.toFixed(2)}</span>
             </li>
             <li className="flex justify-between">
               <span>
@@ -159,16 +179,17 @@ export default function Cart() {
                   (?)
                 </span>
               </span>
-              <span>${tax.toFixed(2)}</span>
+              <span>₹{tax.toFixed(2)}</span>
             </li>
             <li className="flex justify-between pt-3 font-semibold border-t">
               <span>Order total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>₹{total.toFixed(2)}</span>
             </li>
           </ul>
-          <button className="w-full py-3 mt-6 font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700">
-            Checkout
-          </button>
+         
+        <Link href="/checkout"> <button  className="w-full py-3 mt-6 font-semibold text-white bg-indigo-600 rounded-lg cursor-pointer hover:bg-indigo-700">
+            Proceed to Checkout
+          </button></Link>
         </div>
       </div>
     </div>

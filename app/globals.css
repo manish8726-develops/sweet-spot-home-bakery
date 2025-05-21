@@ -158,3 +158,7 @@
     background: #F0DBB8; /* Change to any color */
     color: #504536; /* Optional: Change the text color */
 }
+/* In globals.css or Tailwind config */
+.input-style {
+  @apply w-full p-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-400 focus:outline-none;
+}

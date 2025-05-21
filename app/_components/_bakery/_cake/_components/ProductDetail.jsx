@@ -8,15 +8,38 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementByAmount ,addToCart,updateQuantity} from "../../../../_redux/cart/cartslice";
-const ProductDetail = ({ title, price, desc, img, weight, sale,id }) => {
+import {
+  addToCart,
+} from "../../../../_redux/cart/cartslice";
+import FakeViewerCounter from "../../../FakeViewerCounter";
+import Link from "next/link";
 
-  
+const ProductDetail = ({ title, price, desc, img, weight, sale, id }) => {
   const [selectedImage, setSelectedImage] = useState(img[0].url);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
+  const [showGoToCart, setShowGoToCart] = useState(false);
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter.value);
   const items = useSelector((state) => state.counter.items);
+
+  const isInCart = items.some((item) => item.id === id);
+
+  const handleAddToCart = () => {
+    if (!isInCart) {
+      dispatch(
+        addToCart({
+          id,
+          name: title,
+          price: price[0],
+          quantity,
+          image: selectedImage,
+          weight,
+          sale,
+        })
+      );
+    }
+    setShowGoToCart(true);
+  };
+
   return (
     <div className="flex flex-col max-w-6xl gap-8 p-4 mx-auto lg:flex-row">
       {/* Left: Image Gallery */}
@@ -33,79 +56,58 @@ const ProductDetail = ({ title, price, desc, img, weight, sale,id }) => {
 
         {/* Thumbnails */}
         <div className="flex gap-2 mt-4 overflow-x-auto">
-          {img
-            .map((item) => item.url)
-            .map((img, idx) => (
-              <Image
-                key={idx}
-                src={img}
-                alt={`thumb-${idx}`}
-                width={80}
-                height={80}
-                className={`rounded cursor-pointer border ${
-                  selectedImage === img ? "border-black" : "border-transparent"
-                }`}
-                onClick={() => setSelectedImage(img)}
-              />
-            ))}
+          {img.map((item, idx) => (
+            <Image
+              key={idx}
+              src={item.url}
+              alt={`thumb-${idx}`}
+              width={80}
+              height={80}
+              className={`rounded-md cursor-pointer border transition-all duration-200 ${
+                selectedImage === item.url
+                  ? "border-black shadow-md"
+                  : "border-transparent opacity-70 hover:opacity-100"
+              }`}
+              onClick={() => setSelectedImage(item.url)}
+            />
+          ))}
         </div>
       </div>
 
       {/* Right: Product Info */}
       <div className="flex flex-col w-full gap-4 lg:w-1/2">
-  
         <h1 className="text-2xl font-bold poppin">{title}</h1>
         <p className="text-xl font-semibold text-gray-800 poppin">
-          ₹{price[0]}-₹{price[1]}
+          ₹{price[0]} - ₹{price[1]}
         </p>
         <p className="leading-relaxed text-gray-700 poppin-400">{desc}</p>
 
-        {/* Quantity Selector */}
-        <div className="flex items-center gap-4 mt-4">
-  {/* <select
-    value={quantity}
-    onChange={(e) => {
-      const newQty = Number(e.target.value);
-      setQuantity(newQty);
-      dispatch(incrementByAmount({ id, quantity: newQty }));
-    }}
-    className="w-24 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
-  >
-    {[...Array(10)].map((_, i) => (
-      <option key={i + 1} value={i + 1}>
-        {i + 1}
-      </option>
-    ))}
-  </select> */}
+        {/* Add to Cart / Go to Cart */}
+        <div className="flex flex-col gap-3 mt-4 sm:flex-row sm:items-center">
+          <button
+            onClick={handleAddToCart}
+            className={`px-5 py-2 rounded-md text-white transition poppin w-full sm:w-auto ${
+              isInCart
+                ? "bg-orange-500 hover:bg-orange-600"
+                : "bg-[#4A3F35] hover:bg-[#3a2f29]"
+            }`}
+          >
+            {isInCart ? "Added to Cart" : "Add to Cart"}
+          </button>
 
-  <button
-    onClick={() =>
-      dispatch(
-        addToCart({
-          id,
-          name: title,
-          price: price[0],
-          quantity,
-          image: selectedImage,
-          weight,
-          sale,
-        })
-      )
-    }
-    className={`px-5 py-2 rounded-md text-white transition poppin ${
-      items.some((item) => item.id === id)
-        ? 'bg-orange-500 hover:bg-orange-600'
-        : 'bg-[#4A3F35] hover:bg-[#3a2f29]'
-    }`}
-  >
-    {items.some((item) => item.id === id) ? 'Added to Cart' : 'Add to Cart'}
-  </button>
-</div>
+          {showGoToCart && (
+            <Link
+              href="/cart"
+              className="px-5 py-2 text-center border-2 border-[#4A3F35] text-[#4A3F35] rounded-md hover:bg-[#4A3F35] hover:text-white transition poppin w-full sm:w-auto"
+            >
+              Go to Cart
+            </Link>
+          )}
+        </div>
 
-
-        {/* Info */}
+        {/* Payment Info */}
         <div className="mt-6 space-y-2 text-sm text-gray-600">
-          <p className="font-medium poppin">Guaranteed Safe Checkout</p>
+          <p className="font-medium poppin">✅ Guaranteed Safe Checkout</p>
           <div className="flex items-center gap-3 text-lg poppin-400">
             <span>🅿️</span> <span>GPay</span> <span>PhonePe</span>{" "}
             <span>UPI</span>
@@ -125,9 +127,13 @@ const ProductDetail = ({ title, price, desc, img, weight, sale,id }) => {
           <FaLinkedin className="cursor-pointer hover:text-blue-800" />
           <FaWhatsapp className="cursor-pointer hover:text-green-600" />
         </div>
+
+        {/* Viewer Count */}
+        <FakeViewerCounter />
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
+  
