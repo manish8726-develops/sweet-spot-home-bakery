@@ -5,7 +5,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'ap-south-1.graphassets.com',
-        pathname: '/**', // allow all image paths under this domain
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+        pathname: '/**',
       },
     ],
   },

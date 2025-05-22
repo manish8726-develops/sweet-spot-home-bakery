@@ -44,7 +44,23 @@ export const getCakeDetails = async (id) => {
 
   const variables = { id };
 
-  const result = await request(MASTER_URL, query, variables);
-  return result.product;
+
 };
 
+
+export const gallery = async () => {
+const query = gql`query getPhotos {
+  galleries {
+    photo {
+      id
+      height
+      url
+      width
+      updatedAt
+    }
+    caption
+  }
+}`
+  const result = await request(MASTER_URL, query);
+  return result.galleries;
+}
