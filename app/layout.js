@@ -7,20 +7,18 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import Layout from './_components/Layout';
 import ReduxProvider from './_redux/ReduxProvider';
+import { useEffect, Suspense } from 'react';
+import AppLoaderWrapper from './_components/AppLoaderWrapper';
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 
-  // Define public (unauthenticated) routes
-  const publicRoutes = [
-    '/shop/cakes',
-    '/',
-    '/about-us',
-    '/contact',
-   
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-  // Helper to check if route is public
+  const publicRoutes = ['/', '/shop/cakes', '/about-us', '/contact'];
+
   const isPublicRoute = publicRoutes.some(route => {
     if (route.endsWith('*')) {
       return pathname.startsWith(route.replace('*', ''));
@@ -32,22 +30,24 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body>
-          <ReduxProvider>
-            <SpeedInsights />
-            <Analytics />
-            <Layout>
-              {isPublicRoute ? (
-                children
-              ) : (
-                <>
-                  <SignedIn>{children}</SignedIn>
-                  <SignedOut>
-                    <RedirectToSignIn />
-                  </SignedOut>
-                </>
-              )}
-            </Layout>
-          </ReduxProvider>
+          <AppLoaderWrapper>
+            <ReduxProvider>
+              <SpeedInsights />
+              <Analytics />
+              <Layout>
+                {isPublicRoute ? (
+                  <Suspense fallback={null}>{children}</Suspense>
+                ) : (
+                  <>
+                    <SignedIn>{children}</SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
+                )}
+              </Layout>
+            </ReduxProvider>
+          </AppLoaderWrapper>
         </body>
       </html>
     </ClerkProvider>

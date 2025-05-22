@@ -44,7 +44,8 @@ export const getCakeDetails = async (id) => {
 
   const variables = { id };
 
-
+  const result = await request(MASTER_URL, query, variables);
+  return result.product;
 };
 
 
@@ -58,7 +59,6 @@ const query = gql`query getPhotos {
       width
       updatedAt
     }
-    caption
   }
 }`
   const result = await request(MASTER_URL, query);

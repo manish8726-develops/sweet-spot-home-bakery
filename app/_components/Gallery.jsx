@@ -12,29 +12,8 @@ function Gallery({ data }) {
       gallery: '#my-gallery',
       children: 'a',
       pswpModule: () => import('photoswipe'),
-      // Provide a custom caption UI inside the lightbox
       showHideAnimationType: 'zoom',
       padding: { top: 20, bottom: 40, left: 10, right: 10 },
-      pswpModule: () => import('photoswipe'),
-    });
-
-    // Listen for the PhotoSwipe open event to inject captions
-    lightbox.on('contentActivate', (e) => {
-      const captionText = e.slide.data.caption;
-      const captionEl = document.createElement('div');
-      captionEl.className = 'pswp-caption pswp-caption--custom';
-      captionEl.style.cssText = `
-        color: white;
-        padding: 1rem;
-        font-size: 1rem;
-        text-align: center;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-      `;
-      captionEl.textContent = captionText || '';
-      e.content.element.appendChild(captionEl);
     });
 
     lightbox.init();
@@ -64,7 +43,6 @@ function Gallery({ data }) {
                   href={src}
                   data-pswp-width={width}
                   data-pswp-height={height}
-                  data-caption={caption}
                   target="_blank"
                   rel="noreferrer"
                   className="block"
