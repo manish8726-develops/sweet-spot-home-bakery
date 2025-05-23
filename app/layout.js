@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import './globals.css';
-import { usePathname } from 'next/navigation';
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
-import Layout from './_components/Layout';
-import ReduxProvider from './_redux/ReduxProvider';
-import { useEffect, Suspense } from 'react';
-import AppLoaderWrapper from './_components/AppLoaderWrapper';
+import "./globals.css";
+import { usePathname } from "next/navigation";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/nextjs";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
+import Layout from "./_components/Layout";
+import ReduxProvider from "./_redux/ReduxProvider";
+import { useEffect, Suspense } from "react";
+import AppLoaderWrapper from "./_components/AppLoaderWrapper";
+import Head from "next/head";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -17,11 +23,11 @@ export default function RootLayout({ children }) {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const publicRoutes = ['/', '/shop/cakes', '/about-us', '/contact'];
+  const publicRoutes = ["/", "/shop/cakes", "/about-us", "/contact"];
 
-  const isPublicRoute = publicRoutes.some(route => {
-    if (route.endsWith('*')) {
-      return pathname.startsWith(route.replace('*', ''));
+  const isPublicRoute = publicRoutes.some((route) => {
+    if (route.endsWith("*")) {
+      return pathname.startsWith(route.replace("*", ""));
     }
     return pathname === route;
   });

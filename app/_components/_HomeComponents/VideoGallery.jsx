@@ -1,4 +1,5 @@
 import { Play } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function VideoGallery() {
@@ -65,12 +66,12 @@ export default function VideoGallery() {
 
       {/* CTA Button */}
       <div className="mt-12 text-center">
-        <a
+        <Link
           href="/gallery"
           className="inline-block px-6 py-3 text-lg font-semibold transition border-[#66553f] border-2 rounded-full hover:bg-[#504536] hover:text-white"
         >
           View Our Gallery {'>>'}
-        </a>
+        </Link>
       </div>
     </section>
   );

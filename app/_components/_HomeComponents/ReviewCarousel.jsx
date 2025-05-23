@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 import { FaGoogle, FaStar } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
+import Link from 'next/link';
 
 // Optional: Custom Swiper navigation styles
 const swiperStyles = `
@@ -101,9 +102,9 @@ export default function ReviewCarousel() {
             ))}
           </div>
           <p className="mt-1 text-sm text-gray-700">760 Google reviews</p>
-          <button className="px-4 py-2 mt-4 font-medium text-white bg-blue-600 rounded-lg">
+          <Link href={'https://forms.gle/iEW3oUrh4xch7GCg6'} className="px-4 py-2 mt-4 font-medium text-white bg-blue-600 rounded-lg">
             Write a review
-          </button>
+          </Link>
         </div>
 
         {/* Swiper Carousel */}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const GiftCard = () => {
@@ -37,18 +38,18 @@ const GiftCard = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col flex-wrap justify-center gap-3 sm:flex-row lg:gap-4">
-              <a
-                href="#"
+              <Link
+                href="/contact"
                 className="px-5 py-2 text-sm sm:text-base text-white border-2 border-white rounded-full hover:bg-white hover:text-[#4a3c2a] transition"
               >
                 Order Custom Cake
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/shop/cakes"
                 className="px-5 py-2 text-sm sm:text-base text-white border-2 border-white rounded-full hover:bg-white hover:text-[#4a3c2a] transition"
               >
                 Explore Menu
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 // app/components/HeroSection.tsx or .js
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -25,12 +26,12 @@ export default function HeroSection() {
         <p className="mb-6 text-lg md:text-2xl poppin-400">
           your innovative ideas. Our challenge
         </p>
-        <a
-          href="/menu"
+        <Link
+          href="/shop/cakes"
           className="inline-block px-6 py-3 text-lg transition border border-white rounded-full hover:bg-white hover:text-black"
         >
           Explore Our Menu &gt;&gt;
-        </a>
+        </Link>
       </div>
     </section>
   );

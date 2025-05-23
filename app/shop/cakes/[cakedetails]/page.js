@@ -1,7 +1,10 @@
 import { getCakeDetails } from "../../../_services/index";
 import ProductDetail from "../../../_components/_bakery/_cake/_components/ProductDetail";
 import React from "react";
-
+export const metadata = {
+  title: 'Cake Details',
+  description: 'Delicious handcrafted cookie dough treats and more!',
+};
 export default async function Page({ params }) {
   const { cakedetails } = await params;
   const data = await getCakeDetails(cakedetails);

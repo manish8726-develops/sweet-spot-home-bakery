@@ -3,6 +3,10 @@ import SectionHeader from '../_components/Repeating_components/SectionHeader'
 import FounderNotes from '../_components/_HomeComponents/FounderNotes'
 import Divider from '../_components/Divider'
 import HeroSection from '../_components/_HomeComponents/HeroSection'
+export const metadata = {
+  title: 'About us',
+  description: 'Delicious handcrafted cookie dough treats and more!',
+};
 
 const page = () => {
   return (

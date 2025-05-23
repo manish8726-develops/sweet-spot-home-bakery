@@ -1,6 +1,7 @@
 import { Facebook, Instagram, LinkedinIcon } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FounderNotes = () => {
   return (
@@ -32,10 +33,7 @@ const FounderNotes = () => {
               <Facebook className="w-6 h-6" />
               <LinkedinIcon className="w-6 h-6" />
             </div>
-
-            <button className="bg-[#faebd7] text-[#504536] px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#f0dbb8] transition">
-              Read more &gt;&gt;
-            </button>
+            <Link href={'/about-us'} className="bg-[#faebd7] text-[#504536] px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#f0dbb8] transition">   Read more &gt;&gt;</Link>
           </div>
         </div>
       </div>
