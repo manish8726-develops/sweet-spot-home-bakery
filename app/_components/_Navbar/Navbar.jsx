@@ -14,22 +14,22 @@ export default function Navbar() {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about-us" },
-    {
-      name: "Menu",
-      dropdown: true,
-      items: [
-        { name: "Desserts", href: "/menu/desserts" },
-        { name: "Drinks", href: "/menu/drinks" },
-        { name: "Burgers", href: "/menu/burgers" },
-      ],
-    },
+    // {
+    //   name: "Menu",
+    //   dropdown: true,
+    //   items: [
+    //     { name: "Desserts", href: "/menu/desserts" },
+    //     { name: "Drinks", href: "/menu/drinks" },
+    //     { name: "Burgers", href: "/menu/burgers" },
+    //   ],
+    // },
     {
       name: "Shop",
       dropdown: true,
       items: [
         { name: "Cakes", href: "/shop/cakes" },
-        { name: "Cookies", href: "/shop/cookies" },
-        { name: "Gifting", href: "/shop/gifting" },
+        // { name: "Cookies", href: "/shop/cookies" },
+        // { name: "Gifting", href: "/shop/gifting" },
       ],
     },
     { name: "Our Gallery", href: "/gallery" },
