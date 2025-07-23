@@ -74,7 +74,8 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="flex flex-col items-center justify-between pt-4 mt-8 text-xs border-t border-white/30 md:flex-row">
         <p>Copyright@2024 SHUBH'S WONDER KITCHEN</p>
-        <a href="https://www.flaticon.com/free-animated-icons/customer-service" className="poppin-400" title="customer service animated icons">Animated icons created by Freepik - Flaticon</a>
+        {/* <a href="https://www.flaticon.com/free-animated-icons/customer-service" className="poppin-400" title="customer service animated icons">Animated icons created by Freepik - Flaticon</a> */}
+        <a href="https://manish2027.vercel.app/" className="poppin-400" title="customer service animated icons">Develop With 💖 By Manish</a>
         <div className="flex gap-4 mt-2 md:mt-0">
           <a href="#" className="hover:underline">Privacy Policy</a>
           <a href="#" className="hover:underline">Terms & Conditions</a>
